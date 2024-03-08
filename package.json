@@ -19,6 +19,7 @@
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
     "@tailwindcss/forms": "^0.5.7",
+    "antd": "^5.15.1",
     "axios": "^1.6.5",
     "framer-motion": "^11.0.8",
     "immer": "^10.0.3",
@@ -28,6 +29,7 @@
     "react-router-dom": "^6.21.1",
     "react-use": "^17.4.2",
     "swr": "^2.2.4",
+    "tcplayer.js": "^5.1.0",
     "zustand": "^4.4.7"
   },
   "devDependencies": {

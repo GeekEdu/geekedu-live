@@ -1,6 +1,9 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Flex } from 'antd'
+import VideoPage from '../video-page'
+import ChatPage from '../chat-page'
 
 const user = {
   name: 'Tom Cook',
@@ -195,6 +198,10 @@ export default function Navbar() {
         </header>
         <main>
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">{/* Your content */}</div>
+          <Flex gap='50px' justify='center'>
+            <VideoPage />
+            <ChatPage />
+          </Flex>
         </main>
       </div>
     </>
