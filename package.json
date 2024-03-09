@@ -18,9 +18,11 @@
   },
   "dependencies": {
     "@vueuse/core": "^10.7.0",
+    "ant-design-vue": "^4.1.2",
     "axios": "^0.27.2",
     "element-plus": "^2.4.3",
     "pinia": "^2.1.7",
+    "tcplayer.js": "^5.1.0",
     "vue": "^3.3.11",
     "vue-router": "^4.2.5"
   },
@@ -41,6 +43,7 @@
     "eslint": "^8.55.0",
     "eslint-plugin-todo-ddl": "^1.1.1",
     "jsdom": "^22.1.0",
+    "less": "^4.2.0",
     "lint-staged": "^15.2.0",
     "prettier": "^3.1.1",
     "sass": "^1.69.5",

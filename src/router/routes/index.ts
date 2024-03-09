@@ -2,6 +2,7 @@ import type { RouteRecordRaw } from 'vue-router'
 import HomeView from '@/pages/HomeView.vue'
 import Dynamic from '@/pages/demos/dynamic/index.vue'
 import VueUse from '@/pages/demos/vueuse/index.vue'
+import Login from '@/pages/login/Login.vue'
 
 const NotFind = () => import('@/pages/404/index.vue')
 const demosWrapper = () => import('@/pages/demos/index.vue')
@@ -42,6 +43,11 @@ const routes: RouteRecordRaw[] = [
         name: 'dynamic'
       }
     ]
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
   }
 ]
 
