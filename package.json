@@ -1,137 +1,62 @@
 {
-  "name": "react-awesome-template",
-  "private": true,
+  "name": "vite-vue3-ts-element-sass-template",
   "type": "module",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "scripts": {
-    "prepare": "husky install",
-    "dev": "vite --mode development",
-    "prod": "vite --mode production",
-    "build:dev": "tsc && vite build --mode development",
-    "build:prod": "tsc && vite build --mode production",
-    "lint-staged": "lint-staged",
-    "format": "prettier --write ."
+    "dev": "vite",
+    "build": "vite build",
+    "build:test": "vite build --mode test",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
+    "cz": "git add . && czg",
+    "postinstall": "simple-git-hooks",
+    "updatehooks": "git config core.hooksPath .git/hooks/ && rm -rf .git/hooks && npx simple-git-hooks"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.8.2",
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.0",
-    "@headlessui/react": "^1.7.18",
-    "@heroicons/react": "^2.1.1",
-    "@tailwindcss/forms": "^0.5.7",
-    "antd": "^5.15.1",
-    "axios": "^1.6.5",
-    "framer-motion": "^11.0.8",
-    "immer": "^10.0.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router": "^6.21.1",
-    "react-router-dom": "^6.21.1",
-    "react-use": "^17.4.2",
-    "swr": "^2.2.4",
-    "tcplayer.js": "^5.1.0",
-    "zustand": "^4.4.7"
+    "@vueuse/core": "^10.7.0",
+    "axios": "^0.27.2",
+    "element-plus": "^2.4.3",
+    "pinia": "^2.1.7",
+    "vue": "^3.3.11",
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "@types/node": "^20.11.0",
-    "@types/react": "^18.2.47",
-    "@types/react-dom": "^18.2.18",
-    "@types/react-router-dom": "^5.3.3",
-    "@typescript-eslint/eslint-plugin": "^5.62.0",
-    "@typescript-eslint/parser": "^5.62.0",
-    "@vitejs/plugin-react": "^4.2.1",
-    "autoprefixer": "^10.4.16",
-    "cssnano": "^6.0.3",
-    "eslint": "^8.56.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.3.5",
-    "husky": "^8.0.3",
+    "@antfu/eslint-config": "^2.4.5",
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
+    "@tsconfig/node18": "^2.0.1",
+    "@types/node": "^18.19.3",
+    "@vitejs/plugin-vue": "^4.5.2",
+    "@vitejs/plugin-vue-jsx": "^3.1.0",
+    "@vitest/coverage-v8": "^1.0.4",
+    "@vitest/ui": "^1.0.4",
+    "@vue/test-utils": "^2.4.3",
+    "c8": "^8.0.1",
+    "cz-git": "^1.8.0",
+    "czg": "^1.8.0",
+    "eslint": "^8.55.0",
+    "eslint-plugin-todo-ddl": "^1.1.1",
+    "jsdom": "^22.1.0",
     "lint-staged": "^15.2.0",
-    "postcss": "^8.4.33",
     "prettier": "^3.1.1",
-    "prettier-plugin-tailwindcss": "^0.4.1",
-    "rollup-plugin-visualizer": "^5.12.0",
-    "sass": "^1.69.7",
-    "tailwindcss": "^3.4.1",
+    "sass": "^1.69.5",
+    "simple-git-hooks": "^2.9.0",
     "typescript": "^5.3.3",
-    "vite": "^4.5.1",
-    "vite-plugin-compression": "^0.5.1",
-    "vite-plugin-html": "^3.2.1",
-    "vite-plugin-svgr": "^3.3.0"
+    "unplugin-auto-import": "^0.17.2 ",
+    "unplugin-element-plus": "^0.8.0",
+    "unplugin-vue-components": "^0.26.0",
+    "vite": "^5.0.8",
+    "vitest": "^1.0.4"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged",
+    "commit-msg": "npx --no-install commitlint --edit \"$1\""
   },
   "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "npx eslint --fix"
-    ],
-    "*": [
-      "npx prettier --write"
-    ]
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "browser": true,
-      "es2020": true
-    },
-    "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:@typescript-eslint/recommended-requiring-type-checking",
-      "plugin:react-hooks/recommended"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "ecmaVersion": "latest",
-      "sourceType": "module",
-      "project": true
-    },
-    "plugins": [
-      "react-refresh"
-    ],
-    "rules": {
-      "react-refresh/only-export-components": [
-        "warn",
-        {
-          "allowConstantExport": true
-        }
-      ],
-      "@typescript-eslint/no-non-null-assertion": "off"
-    }
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "bracketSpacing": true,
-    "arrowParens": "avoid",
-    "htmlWhitespaceSensitivity": "css",
-    "endOfLine": "auto",
-    "importOrder": [
-      "^react(.*)$",
-      "^@reduxjs/(.*)$",
-      "<THIRD_PARTY_MODULES>",
-      "^@/(.(?!png|jpg|jpeg|svg))$",
-      "^@/assets/svgs",
-      "^@/assets/images",
-      "^[./]((?!scss|css|less).)*$",
-      ".(scss|less)$",
-      ".(css)$"
-    ],
-    "importOrderSeparation": true,
-    "importOrderSortSpecifiers": true,
-    "tailwindFunctions": [
-      "clsx",
-      "cva",
-      "classNames"
-    ],
-    "plugins": [
-      "@trivago/prettier-plugin-sort-imports",
-      "prettier-plugin-tailwindcss"
-    ]
+    "*": "eslint --fix"
   }
 }

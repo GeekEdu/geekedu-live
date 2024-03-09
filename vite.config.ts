@@ -1,89 +1,69 @@
-import react from '@vitejs/plugin-react'
-import { resolve } from 'path'
-import { visualizer } from 'rollup-plugin-visualizer'
-import { defineConfig, loadEnv } from 'vite'
-import compression from 'vite-plugin-compression'
-import { createHtmlPlugin } from 'vite-plugin-html'
-import svgr from 'vite-plugin-svgr'
+/// <reference types="vitest" />
 
-export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '')
+import path from 'path'
+import { fileURLToPath } from 'node:url'
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import ElementPlus from 'unplugin-element-plus/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import vueJsx from '@vitejs/plugin-vue-jsx'
+import { configDefaults } from 'vitest/config'
 
-  const proxyApi = env.VITE_APP_PROXY_API
-  const proxyUrl = env.VITE_APP_PROXY_URL
-  const proxy = {}
-
-  if (!!proxyApi && !!proxyUrl) {
-    proxyApi?.split(';')?.forEach((api: string, index: number) => {
-      proxy[api] = {
-        target: proxyUrl?.includes(';')
-          ? proxyUrl?.split(';')?.[index]
-          : proxyUrl,
-        ws: true,
-        changeOrigin: true,
-        secure: false,
-        rewrite: (path: string) => path.replace(RegExp(`/^/${api}/`), ''),
-      }
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    vue(),
+    vueJsx(),
+    // Element Plus 的UI按需引入配置
+    AutoImport({
+      resolvers: [ElementPlusResolver()]
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()]
+    }),
+    ElementPlus({
+      defaultLocale: 'zh-cn'
     })
-  }
-
-  return {
-    build: {
-      outDir: 'build',
-      rollupOptions: {
-        output: {
-          assetFileNames: assetInfo => {
-            const info = assetInfo.name.split('.')
-            let extType = info[info.length - 1]
-
-            if (
-              /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/i.test(assetInfo.name)
-            ) {
-              extType = 'media'
-            }
-            if (/\.(png|jpe?g|gif|svg|webp)(\?.*)?$/.test(assetInfo.name)) {
-              extType = 'img'
-            }
-            if (/\.(woff2?|eot|ttf|otf)(\?.*)?$/i.test(assetInfo.name)) {
-              extType = 'fonts'
-            }
-
-            return `${extType}/[name]-[hash][extname]`
-          },
-          chunkFileNames: 'js/[name]-[hash].js',
-          entryFileNames: 'js/[name]-[hash].js',
-        },
+  ],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    exclude: [...configDefaults.exclude, 'e2e/*'],
+    root: fileURLToPath(new URL('./', import.meta.url))
+  },
+  optimizeDeps: {
+    include: ['vue', 'vue-router', 'pinia', 'axios']
+  },
+  build: {
+    sourcemap: true
+  },
+  server: {
+    port: 5173,
+    host: '0.0.0.0',
+    proxy: {
+      '/api/': {
+        target:
+          'https://service-rbji0bev-1256505457.cd.apigw.tencentcs.com/release',
+        changeOrigin: true,
+        rewrite: p => p.replace(/^\/api/, '')
       },
-    },
-    resolve: {
-      alias: {
-        '@': resolve(resolve(), './src'),
+      '/api-prod/': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+        rewrite: p => p.replace(/^\/api-prod/, '')
       },
-    },
-    server: {
-      port: 3000,
-      open: true,
-      host: '0.0.0.0',
-      proxy,
-    },
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: '@import "@/scss/base.scss";',
-        },
-      },
-      modules: {
-        localsConvention: 'camelCaseOnly',
-      },
-    },
-    plugins: [
-      svgr(),
-      compression(),
-      react(),
-      createHtmlPlugin({
-        inject: { data: { APP_TITLE: env.VITE_APP_TITLE } },
-      }),
-      visualizer({ filename: './analyze/analyze.html', gzipSize: true }),
-    ],
+      '/api-test/': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+        rewrite: p => p.replace(/^\/api-test/, '')
+      }
+    }
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src')
+    }
   }
 })

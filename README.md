@@ -1,77 +1,61 @@
-<h1 align="center">
-  React Awesome Template
-</h1>
+# Vite5.x + Vue 3.x + Typescript
 
-<p align="center">
-  <img src="https://img.shields.io/github/package-json/v/wyx2333333/react-awesome-template" />
-  <img src="https://img.shields.io/github/license/wyx2333333/react-awesome-template" />
-</p>
+[preview](https://vite.vue3.sugarat.top/)
+## Features
+### PROD
+* [x] [Vue3](https://vuejs.org/)
+* [x] [Pinia](https://pinia.vuejs.org/) - replace vuex
+* [x] [Vue-Router](https://router.vuejs.org/)
+* [x] [Axios](https://github.com/axios/axios)
+* [x] [Provide/inject](https://vuejs.org/guide/components/provide-inject.html#provide-inject)
+* [x] [polyfill.io](https://github.com/JakeChampion/polyfill-service)
+* [x] [Element UI Plus](https://github.com/element-plus/element-plus)
+* [x] [VueUse](https://vueuse.org/)
 
-## Technology Stack
+### DEV
+* [x] [PNPM 8](https://pnpm.io/zh/cli/run)
+* [x] [Vite 5](https://github.com/vitejs/vite)
+* [x] [TypeScript 5](https://github.com/microsoft/TypeScript/#readme)
+* [x] [Sass](https://github.com/sass/sass)
+* [x] [Eslint 8](https://eslint.org/) + [@antfu/eslint-config](https://github.com/antfu/eslint-config)
+* [x] [Vitest 1.0](https://vitest.dev/) - unit testing
+* [x] [simple-git-hooks](https://github.com/toplenboren/simple-git-hooks#readme) - Git Hooks
+* [x] [commitlint](https://commitlint.js.org/#/) - - commit message lint
 
-- [`React`](https://reactjs.org)
-- [`React Router`](https://reactrouter.com)
-- [`Vite`](https://vitejs.dev)
-- [`Axios`](https://axios-http.com)
-- [`SWR`](https://swr.vercel.app)
-- [`Zustand`](https://zustand-demo.pmnd.rs)
-- [`Tailwindcss`](https://tailwindcss.com)
-- [`ESLint`](https://eslint.org)
-- [`Prettier`](https://prettier.io)
-
-## Download
-
-### 1. Use [`react-awesome-cli`](https://www.npmjs.com/package/react-awesome-cli)
-
+## Use This Template
+```sh
+npx degit atqq/vite-vue3-template#main my-project
 ```
-npm i react-awesome-cli -g
+or
 
-rac
-# or
-react-awesome-cli
-```
+Visit：[https://github.com/ATQQ/vite-vue3-template/generate](https://github.com/ATQQ/vite-vue3-template/generate)
+## Usage
+**建议使用 >= Node v18**
 
-### 2. Use git
+![](https://img.cdn.sugarat.top/mdImg/MTY4NTU0MjM3NTI1Mw==685542375253)
 
-```
-git clone https://github.com/wyx2333333/react-awesome-template.git
-cd react-awesome-template
-```
-
-## Development
-
-### Install dependencies
-
-```
-npm i
-# or
-yarn
-# or
-pnpm i
+### install dep
+need install pnpm
+```sh
+# pnpm8
+npm i -g pnpm
 ```
 
-### Start local server
-
-```
-npm dev/prod
-# or
-yarn dev/prod
-# or
-pnpm dev/prod
+```sh
+pnpm install
 ```
 
-And then open http://localhost:3000 to view it in the browser.
+### Dev
+```sh
+pnpm dev
+```
 
-### Scripts
+### Build
+```sh
+pnpm build
+```
 
-| Script             | Description                                                    |
-| ------------------ | -------------------------------------------------------------- |
-| npm run dev        | Runs the app in the development mode. ( use .env.development ) |
-| npm run prod       | Runs the app in the production mode. ( use .env.production )   |
-| npm run build:dev  | Builds the app for development to the `dist` folder.           |
-| npm run build:prod | Builds the app for production to the `dist` folder.            |
-| npm run format     | Prettier format.                                               |
-
-## License
-
-This project is licensed under the terms of the [MIT license](https://github.com/wyx2333333/react-awesome-template/blob/main/LICENSE).
+### Preview Build
+```sh
+pnpm preview
+```
